@@ -98,15 +98,33 @@ The thesis: **AI systems should be private, persistent, and provable.** Not one 
 
 ## Background
 
-My background is in quality systems and validation for regulated industries — the world where "it works" is never enough and you need to prove *how* it works, *why* it works, and *what* it would take for it to fail.
+For two decades, my job was to make sure software wouldn't get my employer sued.
 
-That lens shapes everything I build. The DEPA Crucible isn't just a compression algorithm — it's a validation protocol with quantified fidelity probes. The PHI Egress Firewall isn't just a content filter — it's an audit trail with a defined scope and documented exclusions. The Certified Agentic Firewall produces logs that a QA auditor can actually read.
+In a previous pharma role, I validated ten-plus mission-critical lab and quality systems through multiple FDA and EMA inspections — with zero documentation findings. Before that, at a large health system, I built the HIPAA-compliant workflows and audit trails that let PACS/DICOM imaging systems handle patient data legally and safely.
 
-I'm now applying that instinct to AI infrastructure: building systems that are private, persistent, and provable — the three properties that regulated industries require and that most AI tooling ignores entirely.
+Then I watched the AI industry skip the entire validation discipline. Probabilistic models without traceable outputs. Audit trails as an afterthought. Six-figure compute bills for capabilities that should run on a laptop. Lawsuits and incident reports as the regression-test suite.
 
-Open to infrastructure, platform, and applied AI roles where the problem is making AI production-grade in environments that can't afford to get it wrong.
+**So I built the alternative.**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Let's%20Connect-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/qualityai/)
+I architect deterministic, auditable AI micro-agents — small, Apache-licensed language models (Qwen3, Llama 3.2, Phi-3.5, Mistral) bound to structured Python logic, formal JSON schemas, and immutable audit trails. They run on commodity hardware (<24GB VRAM, no cloud lock-in). Every output emits a 21 CFR Part 11-compliant JSON audit trail by construction — not by retrofit.
+
+What that means in practice:
+- A pharma batch-record validator that catches ALCOA++ violations before they reach the regulator
+- A fintech model card auditor that aligns model deployments to SR 26-2 in a single API call
+- A logistics temperature-excursion classifier that emits GDP-compliant exception reports without hallucination
+
+**The agent is a byproduct. The Validation Package is the product.**
+
+Every micro-agent ships with: an IQ/OQ/PQ test suite as a public Hugging Face Dataset; a GxP Agent Card; a 100% deterministic-accuracy benchmark; and a JSON audit-trail schema mapped to NIST AI RMF 1.0, NIST AI 600-1, ISO/IEC 42001 Annex A, EU AI Act Articles 9–15, GAMP 5 Second Edition + ISPE GAMP AI Guide (2025), and FDA PCCP guidance (Aug 2025).
+
+---
+
+### Open to
+
+- **W-2 roles** (Senior IC and Director-level): Responsible AI Assurance & Validation · AI Quality Engineering · AI Governance · AI Risk
+- **Enterprise engagements**: Validation Package delivery ($50K–$250K, fixed-scope, audit-defensible by design) — for QA, Risk, and Governance teams whose AI roadmap currently relies on *"we'll figure out audit later"*
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Let's%20Talk-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/qualityai/)&nbsp;&nbsp;DM open.
 
 ---
 
