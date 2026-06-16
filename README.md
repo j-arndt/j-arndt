@@ -1,41 +1,54 @@
 # Justin Arndt
 
-**Regulated AI & Data Validation Engineering for Pharmaceutical Manufacturing**
+**Enterprise Systems Administration · Software Validation · Technical Support Specialist**
+
+I am a technical specialist with **18 years of experience** troubleshooting complex database configurations, systems administration parameters, and third-party integrations across highly regulated environments (healthcare IT and computer system validation). 
+
+My background combines deep technical diagnostic capability (SQL, network infrastructure, data analysis) with client success focus (reducing support ticket volume by 40% through optimized documentation) and formal root-cause analysis (5 Whys, Ishikawa diagrams).
 
 ---
 
-## Pinned -- SUS CPV Sentinel
+## Featured Projects
 
-> **USP <665> became enforceable 1 May 2026.** End users now bear regulatory responsibility for assessing Process Equipment-Related Leachables (PERLs) across their entire plastic manufacturing train. ASTM E3051-25 (January 2025) requires digital data management for SUS qualification and continued verification.
+### 🛠️ [zendesk](https://github.com/j-arndt/zendesk) — Zendesk AI Triage & Resolution Agent
+An automated customer support triage agent built using the **Zendesk REST API** and LLMs to automate incident queue management, protect data privacy, and streamline developer escalation pipelines.
+- **Compliance Filter:** Automatically scans incoming tickets for HIPAA/PHI violations (such as SSNs and DOBs) and redacts them prior to AI processing.
+- **Root Cause Classifier:** Isolates whether a user's ticket stems from configuration mistakes (support-resolved) or backend database constraints (e.g., duplicate key synchronization errors).
+- **Auto-Response Drafts:** Formulates public customer responses and detailed developer escalation notes, inserting them as internal notes.
 
-**[sus-cpv-sentinel](https://github.com/j-arndt/sus-cpv-sentinel)** -- Stage 3 Continued Process Verification for Single-Use Systems
-
-- GAMP 5 Category 4 | Fully validated | 51 URS requirements | 39/39 test cases
-- Cpk/Ppk per SKU | Shewhart I-MR | Hotelling T2 | Supplier SCN Scorecard
-- ALCOA+-compliant SHA-256 hash-chained audit trail | 21 CFR Part 11
-- Complete validation package: VP | URS | FMEA | IQ | OQ | PQ | RTM | VSR
-- Kneat Gx execution | Veeva Vault QualityDocs document control
+![Zendesk Agent Architecture](https://raw.githubusercontent.com/j-arndt/zendesk/main/zendesk_agent_architecture.png)
 
 ---
 
-## Regulatory Alignment
-
-| Standard | Scope |
-|---|---|
-| FDA Process Validation (2011) Stage 3 | Continued Process Verification framework |
-| ASTM E3051-25 (January 2025) | SUS digital data management and qualification |
-| PDA Technical Report No. 66 | SUS E&L monitoring, supplier qualification |
-| USP <665> (effective 1 May 2026) | PERL assessment, plastic manufacturing train |
-| 21 CFR Part 11 / ALCOA+ | Electronic records, audit trail, data integrity |
-| GAMP 5 Second Edition (2022) | Risk-based validation, Category 4 software |
-| ICH Q9(R1) | FMEA-based quality risk management |
+### 🛡️ [ironclad](https://github.com/j-arndt/ironclad) — Formal Verification Sandbox for Optimization Solvers
+A public verification sandbox utilizing **Lean 4** and cryptographic proof chains to validate the correctness and data integrity of complex circulant optimization solvers.
+- **Irreducible Representations:** Maps global circulant tensors into independent scalar blocks to reduce verification overhead.
+- **Cryptographic Audit:** Pairs solver execution logs with HMAC-SHA256 signatures to prevent adversarial data poisoning or tampering.
 
 ---
 
-## Focus
+## Core Technical Competencies
 
-Closing the gap between pharmaceutical SUS process data, FDA Stage 3 CPV requirements, and regulatory audit readiness through validated, ALCOA+-compliant analytical platforms.
+| Domain | Technologies & Methodologies |
+| --- | --- |
+| **Support & Ticket Operations** | Zendesk (Academy Member), ServiceNow, Jira, SLA Compliance, Incident Triage, Tier 2/3 Escalation |
+| **Systems & Database Admin** | SQL Server, Active Directory (AD), Role-Based Access Control (RBAC), Backup & Disaster Recovery, TCP/IP |
+| **Root Cause & QA Testing** | Root Cause Analysis (5 Whys, Ishikawa / Fishbone), CAPA Workflows, Software Patch Testing, IQ/OQ/PQ Validation |
+| **Regulatory & Data Security** | HIPAA (PHI Privacy), 21 CFR Part 11, Data Integrity (ALCOA+), NIST Risk Frameworks, CySA+, Security+ |
+| **Automation & Programming** | Python, SQL, REST APIs, PowerShell, Bash, JSON, YAML |
+| **Documentation & Training** | Standard Operating Procedures (SOPs), Help Center Articles, End-User Quick-Reference Guides, Release Notes |
 
-**[j-arndt.github.io](https://j-arndt.github.io)** -- Portfolio and interactive demos
+---
 
-**[linkedin.com/in/qualityai](https://www.linkedin.com/in/qualityai/)** -- LinkedIn
+## Education & Credentials
+
+* **M.S. in Data Analytics** — Western Governors University (2025)
+* **B.S. in Cybersecurity & Information Assurance** — Western Governors University (2024)
+* **CompTIA Certifications:** Security+ | CySA+ | PenTest+ | Network+ | A+
+
+---
+
+## Get in Touch
+
+* 🔗 **LinkedIn:** [linkedin.com/in/qualityai](https://www.linkedin.com/in/qualityai/)
+* ✉️ **Email:** justinarndt05@gmail.com
