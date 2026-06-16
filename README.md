@@ -16,15 +16,6 @@ An automated customer support triage agent built using the **Zendesk REST API** 
 - **Root Cause Classifier:** Isolates whether a user's ticket stems from configuration mistakes (support-resolved) or backend database constraints (e.g., duplicate key synchronization errors).
 - **Auto-Response Drafts:** Formulates public customer responses and detailed developer escalation notes, inserting them as internal notes.
 
-![Zendesk Agent Architecture](https://raw.githubusercontent.com/j-arndt/zendesk/main/zendesk_agent_architecture.png)
-
----
-
-### 🛡️ [ironclad](https://github.com/j-arndt/ironclad) — Formal Verification Sandbox for Optimization Solvers
-A public verification sandbox utilizing **Lean 4** and cryptographic proof chains to validate the correctness and data integrity of complex circulant optimization solvers.
-- **Irreducible Representations:** Maps global circulant tensors into independent scalar blocks to reduce verification overhead.
-- **Cryptographic Audit:** Pairs solver execution logs with HMAC-SHA256 signatures to prevent adversarial data poisoning or tampering.
-
 ---
 
 ## Core Technical Competencies
