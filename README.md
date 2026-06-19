@@ -16,7 +16,7 @@ I do my best work where accuracy matters and downtime isn't an option — calm u
 
 An end-to-end case study of how I support a business-critical application: incident triage → log and SQL diagnosis → root-cause analysis → fix under ITIL change control → reusable runbook → monitoring and reporting.
 
-### **[→ View the live work sample](https://j-arndt.github.io/j-arndt/)**
+### **[→ View the live work sample](https://j-arndt.github.io)**
 
 ## What I do
 
