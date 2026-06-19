@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Justin Arndt — Application Support Work Sample</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15161d; --navy:#1A1446; --navy2:#2c2570; --blue:#2756d8;
+    --gold:#FFD000; --muted:#5c6275; --line:#e7e9f1; --bg:#ffffff;
+    --soft:#f5f6fb; --soft2:#eef0f8; --good:#1a8f5a; --bad:#d23f3f; --warn:#b8860b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 6%}
+  code,pre,.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{line-height:1.2;letter-spacing:-.01em}
+
+  /* top bar */
+  .topbar{background:var(--navy);color:#fff}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;
+    padding-top:14px;padding-bottom:14px;gap:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:.02em}
+  .brand .role{display:block;font-weight:400;font-size:12.5px;color:#bcb9e0;letter-spacing:.04em;margin-top:2px}
+  .topbar .tag{font-size:12px;color:var(--navy);background:var(--gold);
+    padding:5px 11px;border-radius:999px;font-weight:700;letter-spacing:.03em}
+
+  /* hero */
+  .hero{background:linear-gradient(180deg,#1A1446 0%,#241c5e 100%);color:#fff;
+    padding:54px 0 60px;position:relative}
+  .hero:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;
+    background:var(--gold)}
+  .eyebrow{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .hero h1{font-size:39px;font-weight:800;margin:14px 0 12px}
+  .hero p.lede{font-size:18px;color:#d8d7ee;max-width:680px;margin:0}
+  .chips{margin-top:24px;display:flex;flex-wrap:wrap;gap:9px}
+  .chip{font-size:12.5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
+    color:#ececfb;padding:6px 12px;border-radius:7px;font-weight:500}
+  .disclaimer{margin-top:26px;font-size:13px;color:#c9c8e6;background:rgba(0,0,0,.18);
+    border-left:3px solid var(--gold);padding:11px 15px;border-radius:0 7px 7px 0;max-width:720px}
+
+  section{padding:46px 0;border-bottom:1px solid var(--line)}
+  .kicker{font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  h2.sec{font-size:26px;margin:9px 0 18px;font-weight:800;color:var(--navy)}
+  p{margin:0 0 15px}
+  .lead{font-size:17px;color:#33353f}
+
+  /* process band */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+  .step{background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:17px 16px;position:relative}
+  .step .n{font-family:'JetBrains Mono';font-size:12px;color:#fff;background:var(--navy);
+    width:25px;height:25px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:600}
+  .step h4{margin:11px 0 5px;font-size:15.5px;color:var(--navy)}
+  .step p{font-size:13.2px;color:var(--muted);margin:0}
+  .step .maps{margin-top:9px;font-size:11.5px;color:var(--blue);font-weight:600}
+
+  /* cards / grids */
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:6px 0 16px}
+  .factgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:6px 0 4px}
+  .factgrid div{background:#fff;padding:14px 16px}
+  .factgrid .k{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .factgrid .v{font-size:15px;font-weight:600;color:var(--ink);margin-top:3px}
+  .sev{display:inline-block;background:#fbe9e9;color:var(--bad);font-weight:700;font-size:12px;
+    padding:2px 9px;border-radius:6px;border:1px solid #f3c9c9}
+
+  pre{background:#0e1024;color:#e7e9f6;border-radius:10px;padding:16px 18px;overflow-x:auto;
+    font-size:13px;line-height:1.65;border:1px solid #20223e}
+  pre .c{color:#7f86b8}        /* comment */
+  pre .r{color:#ff8a8a}        /* red/error */
+  pre .g{color:#8be0a6}        /* green */
+  pre .y{color:#ffd86b}        /* yellow/keyword */
+  pre .b{color:#8ab4ff}        /* blue/ident */
+  .label{font-size:12.5px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;margin:18px 0 7px}
+
+  ol.why{counter-reset:w;list-style:none;padding:0;margin:6px 0 6px}
+  ol.why li{position:relative;padding:9px 0 9px 44px;border-bottom:1px dashed var(--line)}
+  ol.why li:before{counter-increment:w;content:"why " counter(w);position:absolute;left:0;top:9px;
+    font-family:'JetBrains Mono';font-size:10.5px;color:#fff;background:var(--navy2);
+    padding:2px 7px;border-radius:5px;font-weight:600;letter-spacing:.02em}
+  ol.why li:last-child{border-bottom:none}
+  .rootcause{background:#fff8e0;border:1px solid #f0dd9a;border-left:4px solid var(--gold);
+    border-radius:0 11px 11px 0;padding:16px 20px;margin:10px 0}
+  .rootcause b{color:#8a6d00}
+
+  table{width:100%;border-collapse:collapse;margin:8px 0 6px;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--navy);color:#fff;font-weight:600;font-size:12.5px;letter-spacing:.02em}
+  tr:nth-child(even) td{background:var(--soft)}
+  td .mono{font-size:12.5px}
+
+  ol.run{padding-left:0;list-style:none;counter-reset:r;margin:6px 0}
+  ol.run li{position:relative;padding:11px 0 11px 42px;border-bottom:1px solid var(--line)}
+  ol.run li:last-child{border-bottom:none}
+  ol.run li:before{counter-increment:r;content:counter(r);position:absolute;left:0;top:10px;
+    width:26px;height:26px;background:var(--blue);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700}
+  ol.run b{color:var(--navy)}
+  .escalate{background:var(--soft2);border-radius:10px;padding:14px 18px;margin-top:12px;font-size:14px}
+
+  /* KPI + chart */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:4px 0 24px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px 16px;text-align:center}
+  .kpi .num{font-size:25px;font-weight:800;color:var(--navy);line-height:1}
+  .kpi .num.good{color:var(--good)}
+  .kpi .lab{font-size:11.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em}
+  .chartwrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 18px 8px}
+  .chartwrap h4{margin:0 0 2px;font-size:15px;color:var(--navy)}
+  .chartwrap .sub{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+
+  .maprow{display:grid;grid-template-columns:1.1fr 1.4fr;gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:11px;overflow:hidden}
+  .maprow>div{background:#fff;padding:13px 16px;font-size:14px}
+  .maprow .h{background:var(--navy);color:#fff;font-weight:600;font-size:12.5px}
+  .maprow .req{font-weight:600;color:var(--navy)}
+
+  footer{background:var(--navy);color:#c9c8e6;padding:34px 0 40px;font-size:13.5px}
+  footer b{color:#fff}
+  footer a{color:var(--gold)}
+  .note{font-size:12.5px;color:#9a99c4;margin-top:10px;line-height:1.55}
+
+  @media(max-width:720px){
+    .steps,.kpis{grid-template-columns:repeat(2,1fr)}
+    .factgrid{grid-template-columns:1fr 1fr}
+    .maprow{grid-template-columns:1fr}
+    .hero h1{font-size:30px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <div class="brand">Justin Arndt
+    <span class="role">IT Applications &amp; Operations Support &nbsp;·&nbsp; Systems Administration &nbsp;·&nbsp; Change &amp; Incident Mgmt</span>
+  </div>
+  <div class="tag">WORK SAMPLE</div>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Application Support Case Study</div>
+  <h1>From Incident to Prevention</h1>
+  <p class="lede">A worked example of how I support a business-critical application end to end —
+    triage an outage, find the true root cause, fix it under change control, and make sure it never
+    comes back.</p>
+  <div class="chips">
+    <span class="chip">Incident triage</span>
+    <span class="chip">Root-cause analysis</span>
+    <span class="chip">SQL &amp; log investigation</span>
+    <span class="chip">ITIL change control</span>
+    <span class="chip">Runbook authoring</span>
+    <span class="chip">Monitoring &amp; reporting</span>
+  </div>
+  <div class="disclaimer"><b style="color:#fff">Synthetic demonstration.</b> The application, data, and
+    incident below are fictional, built to show my method on a public sample — not a record of any
+    employer's systems. The approach, queries, and documentation are exactly what I use in real
+    regulated production environments.</div>
+</div></div>
+
+<div class="wrap">
+
+<section>
+  <div class="kicker">The approach</div>
+  <h2 class="sec">How I support an application</h2>
+  <p class="lead">Every support issue follows the same disciplined loop. Each step maps directly to the
+    four things this role is responsible for.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h4>Triage</h4>
+      <p>Confirm scope, impact, and severity. Stabilize and communicate to stakeholders fast.</p>
+      <div class="maps">↳ Application support &amp; troubleshooting</div></div>
+    <div class="step"><div class="n">2</div><h4>Diagnose</h4>
+      <p>Read the logs, query the data, reproduce the failure, isolate the true root cause.</p>
+      <div class="maps">↳ Analysis &amp; root-cause</div></div>
+    <div class="step"><div class="n">3</div><h4>Resolve</h4>
+      <p>Implement the fix under change control with a risk assessment and a backout plan.</p>
+      <div class="maps">↳ Process &amp; change management</div></div>
+    <div class="step"><div class="n">4</div><h4>Prevent</h4>
+      <p>Write the runbook, add monitoring &amp; alerts, and report trends so it can't recur.</p>
+      <div class="maps">↳ Communication &amp; reporting</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Step 0 — context</div>
+  <h2 class="sec">The application &amp; the incident</h2>
+  <p><b>PolicyDocs</b> is an internal business application that ~1,200 agents and service reps use daily
+    to generate and retrieve policy documents. It is a typical three-tier system: a browser front end,
+    a REST API on an application server, and a SQL Server database — with a nightly batch feed and a
+    synchronous call to an external rating vendor's API.</p>
+  <div class="factgrid">
+    <div><div class="k">Incident</div><div class="v">INC-4471</div></div>
+    <div><div class="k">Severity</div><div class="v"><span class="sev">SEV-2 · High</span></div></div>
+    <div><div class="k">Detected</div><div class="v">09:15, peak hours</div></div>
+    <div><div class="k">Symptom</div><div class="v">Intermittent "request timed out" on submit/retrieve</div></div>
+    <div><div class="k">Impact</div><div class="v">~18% of submissions failing; call volume rising</div></div>
+    <div><div class="k">Users affected</div><div class="v">Agents &amp; service reps, all sites</div></div>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);margin-top:10px">The job of application support isn't to
+    guess — it's to <b>narrow a vague symptom into one provable cause</b>, then fix it in a way that
+    holds up to an audit. Here's that, step by step.</p>
+</section>
+
+<section>
+  <div class="kicker">Step 1 — triage</div>
+  <h2 class="sec">Stabilize and scope it in the first 30 minutes</h2>
+  <ol class="run">
+    <li><b>Confirmed scope &amp; impact.</b> Which users, which actions, what error rate — reproduced the
+      failure with a test account to confirm it wasn't user-specific.</li>
+    <li><b>Checked the health signals.</b> API p95 latency had jumped from ~380&nbsp;ms to 6.5&nbsp;s;
+      database <span class="mono">connection-pool</span> utilization was pinned at 100%; server CPU and
+      memory were normal — pointing at the data tier, not capacity.</li>
+    <li><b>Communicated immediately.</b> Posted a status note and ETA to the business and IT channels,
+      opened <span class="mono">INC-4471</span>, and set a 30-minute update cadence. In support, silence
+      is its own incident.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="kicker">Step 2 — diagnose</div>
+  <h2 class="sec">Let the logs and the data name the cause</h2>
+  <p>The application log showed the front-line symptom — requests waiting on the connection pool:</p>
+  <pre><span class="c"># app-server log — 09:22</span>
+<span class="r">ERROR</span> PolicyDocs.Api.DocumentController
+  System.<span class="y">TimeoutException</span>: The connection pool reached its maximum
+  size of <span class="b">100</span> and timed out waiting for an available connection.
+  at GetPolicyDocument(policyId) ... waited 30000ms</pre>
+  <p>A pool runs out when connections are <i>borrowed faster than they're returned</i> — so the real
+    question is "what is holding connections open?" I queried the database for what was actually running:</p>
+  <pre><span class="c">-- what is running right now, and for how long?</span>
+<span class="y">SELECT</span> r.session_id, r.status, r.wait_type,
+       r.total_elapsed_time/1000.0 <span class="y">AS</span> elapsed_s,
+       <span class="b">SUBSTRING</span>(t.text,1,90) <span class="y">AS</span> sql_text
+<span class="y">FROM</span> sys.dm_exec_requests r
+<span class="y">CROSS APPLY</span> sys.dm_exec_sql_text(r.sql_handle) t
+<span class="y">WHERE</span> r.session_id &gt; 50
+<span class="y">ORDER BY</span> elapsed_s <span class="y">DESC</span>;</pre>
+  <p>Two findings stacked on top of each other:</p>
+  <div class="card" style="margin-top:2px">
+    <p style="margin:0 0 8px"><b>Finding A — a slow query holding connections.</b> The document-fetch
+      query was averaging <b>4.2&nbsp;s</b> doing a clustered-index <i>scan</i>. A
+      <span class="mono">status</span> filter added in the prior night's release had no supporting index.</p>
+    <p style="margin:0"><b>Finding B — a connection held across a slow external call.</b> The same code path
+      now made a synchronous call to the vendor rating API (avg <b>5.8&nbsp;s</b>) <i>while still holding the
+      database connection</i>. Under morning peak load, connections drained faster than they returned →
+      pool exhausted → timeouts.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Step 2b — root cause</div>
+  <h2 class="sec">Five whys to the real cause</h2>
+  <ol class="why">
+    <li>Submissions failed because API requests <b>timed out</b>.</li>
+    <li>They timed out because <b>no database connection was available</b> (pool exhausted).</li>
+    <li>The pool exhausted because connections were <b>held open too long</b> during peak.</li>
+    <li>They were held open by a <b>4&nbsp;s unindexed query</b> <i>and</i> a <b>5.8&nbsp;s vendor API call made
+      inside the connection's scope</b>.</li>
+    <li>That happened <b>now</b> because last night's release added the unindexed <span class="mono">status</span>
+      filter and moved the vendor call inside the database transaction.</li>
+  </ol>
+  <div class="rootcause"><b>Root cause:</b> A recent change introduced an unindexed query and held a database
+    connection across a slow external API call. Individually survivable; together, under peak load, they
+    exhausted the connection pool and caused the timeouts. Not a capacity problem — a change problem.</div>
+</section>
+
+<section>
+  <div class="kicker">Step 3 — resolve under change control</div>
+  <h2 class="sec">Fix it without breaking anything else</h2>
+  <p>Because the cause was a change, the fix goes through change control — even in an emergency. That's the
+    discipline that keeps a fix from becoming the next incident.</p>
+  <table>
+    <tr><th>Field</th><th>Emergency change — ECR-2218</th></tr>
+    <tr><td>Change</td><td>(1) Add nonclustered index on <span class="mono">PolicyDoc(status, created_date)</span>; (2) move the vendor API call outside the DB transaction scope; (3) temporarily raise pool max 100→200 as a buffer.</td></tr>
+    <tr><td>Risk / impact</td><td><b>Low.</b> Index is additive (no schema break); code change is isolated to one method; config is reversible. No data migration.</td></tr>
+    <tr><td>Backout plan</td><td>Drop the index, revert the method to prior build, restore pool config — each independently and within minutes.</td></tr>
+    <tr><td>Validation</td><td>Reproduce in staging; confirm p95 latency and pool utilization in production for 60 min post-deploy.</td></tr>
+    <tr><td>Approvals</td><td>Application Owner + Change Manager (emergency CAB).</td></tr>
+  </table>
+  <p style="margin-top:10px"><b>Result after deploy:</b> API p95 latency returned to ~410&nbsp;ms, submission
+    error rate to 0%, and peak connection-pool utilization settled near 46%.</p>
+</section>
+
+<section>
+  <div class="kicker">Step 4a — prevent (the runbook)</div>
+  <h2 class="sec">Turn the fix into a 6-minute runbook</h2>
+  <p class="lead">The first time this happens it's a 72-minute investigation. The next time, anyone on the
+    team resolves it from this runbook in minutes. Writing it down is the job.</p>
+  <div class="label">Runbook · "App slow / timeouts — DB connection-pool exhaustion"</div>
+  <ol class="run">
+    <li><b>Detect.</b> Alert fires: connection-pool utilization &gt; 80% for 5&nbsp;min, or API p95 &gt; 2&nbsp;s.</li>
+    <li><b>Confirm.</b> Run the <span class="mono">dm_exec_requests</span> query (above) to list long-running
+      sessions and wait types. Check the vendor API status page.</li>
+    <li><b>Mitigate now.</b> If a single query dominates, capture its plan; if the vendor API is slow,
+      enable the circuit-breaker / cached-rate fallback to release connections.</li>
+    <li><b>Resolve.</b> Add the missing index (validate the plan flips scan → seek) and/or move external
+      calls outside the connection scope. Raise this as a change (ECR).</li>
+    <li><b>Verify.</b> Watch p95 latency, error rate, and pool utilization for 60&nbsp;min. Confirm with a
+      test transaction.</li>
+    <li><b>Close &amp; communicate.</b> Update the incident, post the all-clear, and log the root cause for the
+      weekly report.</li>
+  </ol>
+  <div class="escalate"><b>Escalation path:</b> App Support (owner, 0–30&nbsp;min) →
+    Database Administration (if blocking/query-plan, 30–60&nbsp;min) →
+    Vendor Management (if the external API is the cause) → Application Owner + Change Manager (for the ECR).</div>
+</section>
+
+<section>
+  <div class="kicker">Step 4b — prevent (monitoring &amp; reporting)</div>
+  <h2 class="sec">Make the application observable</h2>
+  <p>You can't support what you can't see. I added three alert thresholds and a weekly health report so the
+    next pool problem is caught at 80% — before users feel it.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="num">1h12m</div><div class="lab">Mean time to resolve (this incident)</div></div>
+    <div class="kpi"><div class="num good">0%</div><div class="lab">Error rate after fix</div></div>
+    <div class="kpi"><div class="num good">0</div><div class="lab">Recurrences in 90 days</div></div>
+    <div class="kpi"><div class="num">3</div><div class="lab">New preventive alerts</div></div>
+  </div>
+
+  <div class="chartwrap">
+    <h4>Submission error rate — incident day</h4>
+    <div class="sub">Illustrative. The fix (ECR-2218) deployed at 10:20; error rate normalized within 10 minutes.</div>
+    <svg viewBox="0 0 860 300" width="100%" role="img" aria-label="Line chart of error rate during the incident, spiking to 18% then dropping to near zero after the fix">
+      <!-- axes -->
+      <line x1="60" y1="20" x2="60" y2="250" stroke="#c9cde0"/>
+      <line x1="60" y1="250" x2="830" y2="250" stroke="#c9cde0"/>
+      <!-- y gridlines + labels (0,5,10,15,20%) -->
+      <g font-family="JetBrains Mono" font-size="11" fill="#8a90ab">
+        <line x1="60" y1="250" x2="830" y2="250" stroke="#eef0f8"/><text x="30" y="254">0%</text>
+        <line x1="60" y1="193" x2="830" y2="193" stroke="#eef0f8"/><text x="30" y="197">5%</text>
+        <line x1="60" y1="136" x2="830" y2="136" stroke="#eef0f8"/><text x="26" y="140">10%</text>
+        <line x1="60" y1="79"  x2="830" y2="79"  stroke="#eef0f8"/><text x="26" y="83">15%</text>
+        <line x1="60" y1="34"  x2="830" y2="34"  stroke="#eef0f8"/><text x="26" y="38">20%</text>
+      </g>
+      <!-- x labels -->
+      <g font-family="JetBrains Mono" font-size="11" fill="#8a90ab" text-anchor="middle">
+        <text x="60"  y="270">08:00</text><text x="225" y="270">09:00</text>
+        <text x="390" y="270">10:00</text><text x="555" y="270">11:00</text>
+        <text x="720" y="270">12:00</text>
+      </g>
+      <!-- fix marker at 10:20 -> x ~ 445 -->
+      <line x1="445" y1="20" x2="445" y2="250" stroke="#1a8f5a" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="451" y="34" font-family="Inter" font-size="12" fill="#1a8f5a" font-weight="700">ECR-2218 deployed</text>
+      <!-- area + line: 8:00 .2%, 9:00 1%, 9:15 18% spike, 9:30 17%, 10:00 16%, 10:20 fix, 10:35 3%, 11:00 .4%, 12:00 .1% -->
+      <!-- map: y = 250 - (pct/20)*216 ; x by time -->
+      <polyline fill="none" stroke="#2756d8" stroke-width="2.6" stroke-linejoin="round"
+        points="60,248 225,239 266,55 308,66 390,77 445,77 486,218 555,246 720,249 830,249"/>
+      <polygon fill="#2756d8" opacity="0.08"
+        points="60,248 225,239 266,55 308,66 390,77 445,77 486,218 555,246 720,249 830,249 830,250 60,250"/>
+      <circle cx="266" cy="55" r="4" fill="#d23f3f"/>
+      <text x="276" y="50" font-family="Inter" font-size="12" fill="#d23f3f" font-weight="700">peak 18%</text>
+    </svg>
+  </div>
+
+  <div class="label">Weekly application-health report — driven by one query</div>
+  <pre><span class="c">-- daily error rate &amp; p95 latency by application, last 7 days</span>
+<span class="y">SELECT</span> app_name,
+       <span class="b">CAST</span>(request_time <span class="y">AS</span> date)            <span class="y">AS</span> day,
+       <span class="b">COUNT</span>(*)                                <span class="y">AS</span> requests,
+       <span class="b">SUM</span>(<span class="y">CASE WHEN</span> status &gt;= 500 <span class="y">THEN</span> 1 <span class="y">ELSE</span> 0 <span class="y">END</span>) <span class="y">AS</span> errors,
+       <span class="b">ROUND</span>(100.0*<span class="b">SUM</span>(<span class="y">CASE WHEN</span> status&gt;=500 <span class="y">THEN</span> 1 <span class="y">ELSE</span> 0 <span class="y">END</span>)/<span class="b">COUNT</span>(*),2) <span class="y">AS</span> err_pct,
+       <span class="b">PERCENTILE_CONT</span>(0.95) <span class="y">WITHIN GROUP</span> (<span class="y">ORDER BY</span> latency_ms)
+         <span class="y">OVER</span> (<span class="y">PARTITION BY</span> app_name) <span class="y">AS</span> p95_ms
+<span class="y">FROM</span> app_request_log
+<span class="y">WHERE</span> request_time &gt;= <span class="b">DATEADD</span>(day,-7,<span class="b">SYSUTCDATETIME</span>())
+<span class="y">GROUP BY</span> app_name, <span class="b">CAST</span>(request_time <span class="y">AS</span> date);</pre>
+  <p style="font-size:13.5px;color:var(--muted)">That single report becomes the Monday stakeholder update:
+    error rate, latency, the five slowest queries, and any change-linked incidents — the "analysis and
+    reporting that informs decisions" this role calls for.</p>
+</section>
+
+<section>
+  <div class="kicker">Why it matters here</div>
+  <h2 class="sec">How this maps to the role</h2>
+  <div class="maprow">
+    <div class="h">Liberty Mutual responsibility</div><div class="h">Demonstrated above</div>
+    <div class="req">Application support &amp; troubleshooting — diagnose, find root cause, minimize downtime</div>
+    <div>Triaged INC-4471, read logs, queried live sessions, isolated a two-part root cause, restored service.</div>
+    <div class="req">Operational process optimization — translate business needs to technical specs</div>
+    <div>Converted a vague "it's slow" complaint into a precise change (ECR-2218) with index, code, and config specs.</div>
+    <div class="req">Communication &amp; collaboration with stakeholders</div>
+    <div>Status cadence to business &amp; IT, a clear escalation path across App Support, DBA, and Vendor Management.</div>
+    <div class="req">Analysis &amp; reporting — monitor performance, identify trends, inform decisions</div>
+    <div>Stood up three alert thresholds and a SQL-driven weekly health report with KPIs and trend charts.</div>
+  </div>
+</section>
+
+</div>
+
+<footer><div class="wrap">
+  <b>Justin Arndt</b> &nbsp;·&nbsp; Application Support work sample, prepared for the Liberty Mutual
+  IT Applications &amp; Operations Support Specialist role.<br>
+  (717) 808-3119 &nbsp;·&nbsp; justinarndt05@gmail.com &nbsp;·&nbsp; linkedin.com/in/appopspecialist &nbsp;·&nbsp; github.com/j-arndt
+  <div class="note">Synthetic demonstration built with fictional data to illustrate method, judgment, and
+    documentation quality on a public sample. Drawn from 8 years supporting business-critical computerized
+    systems (incident triage, root-cause analysis, change control, and reporting) in regulated production
+    environments.</div>
+</div></footer>
+
+</body>
+</html>
